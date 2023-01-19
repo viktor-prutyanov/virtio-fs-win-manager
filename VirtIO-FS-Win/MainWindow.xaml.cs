@@ -63,5 +63,16 @@ namespace VirtIO_FS_Win
                 PathTB.Text = dialog.FileName;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.ProgramPath = PathTB.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void PathTB_Loaded(object sender, RoutedEventArgs e)
+        {
+            PathTB.Text = Properties.Settings.Default.ProgramPath;
+        }
     }
 }

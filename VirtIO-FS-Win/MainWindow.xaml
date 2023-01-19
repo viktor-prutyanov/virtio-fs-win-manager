@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VirtIO_FS_Win"
         mc:Ignorable="d"
-        Title="VirtIO-FS Manager" ResizeMode="CanMinimize" Height="450" Width="600">
+        Title="VirtIO-FS Manager" ResizeMode="CanMinimize" Height="450" Width="600" Closing="Window_Closing">
     <Grid>
         <Label Content="Path:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="10,17,0,0"/>
         <Label Content="MountPoint:" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="100"/>
@@ -13,7 +13,7 @@
         <Label Content="DebugLogFile:" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
         <Label Content="DebugFlags:" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="100"/>
         <Label Content="CaseInsensitive:" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox Name="PathTB" HorizontalAlignment="Stretch" Height="23" Margin="110,21,90.286,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top"/>
+        <TextBox Name="PathTB" HorizontalAlignment="Stretch" Height="23" Margin="110,21,90.286,0" TextWrapping="NoWrap" VerticalAlignment="Top" Loaded="PathTB_Loaded"/>
         <TextBox Name="MountPointTB" HorizontalAlignment="Left" Height="23" Margin="110,52,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="DebugLogFileTB" HorizontalAlignment="Left" Height="23" Margin="110,83,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="DebugFlagsTB" HorizontalAlignment="Left" Height="23" Margin="110,114,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120"/>
