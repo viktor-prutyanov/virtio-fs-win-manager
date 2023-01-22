@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace VirtIO_FS_Win
 {
@@ -21,11 +22,23 @@ namespace VirtIO_FS_Win
     /// </summary>
     public partial class MainWindow : Window
     {
-        Process process;
+        private readonly Process process = new Process();
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private static string GetWinFspVersion()
+        {
+            using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\WOW6432Node\\WinFsp"))
+            {
+                string installDir = regKey?.GetValue("InstallDir") as string;
+                string dllPath = $"{installDir}\\bin\\winfsp-x64.dll";
+                FileVersionInfo verInfo = FileVersionInfo.GetVersionInfo(dllPath);
+
+                return $"{verInfo.FileMajorPart}.{verInfo.FileMinorPart}.{verInfo.FileBuildPart}";
+            }
         }
 
         private static string MakeStrArg(string arg, string key)
@@ -46,17 +59,15 @@ namespace VirtIO_FS_Win
             string TagArg = MakeStrArg(TagTB.Text, "-t");
             string CaseInsensitiveArg = MakeBoolArg(CaseInsensitiveCB.IsChecked ?? false, "-i");
 
-            process = new Process();
             process.StartInfo.FileName = PathTB.Text;
             process.StartInfo.Arguments = $"{MountPointArg} {DebugLogFileArg} {DebugFlagsArg} {TagArg} {CaseInsensitiveArg}";
 
             process.Start();
-            process.WaitForExit();
         }
 
         private void Button_Click_Select(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
 
             if (dialog.ShowDialog() == true)
             {
@@ -70,9 +81,18 @@ namespace VirtIO_FS_Win
             Properties.Settings.Default.Save();
         }
 
-        private void PathTB_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PathTB.Text = Properties.Settings.Default.ProgramPath;
+            WinFspVersionTB.Text = GetWinFspVersion();
+        }
+
+        private void Button_Click_Stop(object sender, RoutedEventArgs e)
+        {
+            if (!process.HasExited)
+            {
+                process.Kill();
+            }
         }
     }
 }

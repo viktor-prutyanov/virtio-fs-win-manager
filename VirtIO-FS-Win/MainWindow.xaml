@@ -5,21 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VirtIO_FS_Win"
         mc:Ignorable="d"
-        Title="VirtIO-FS Manager" ResizeMode="CanMinimize" Height="450" Width="600" Closing="Window_Closing">
+        Title="VirtIO-FS Manager" ResizeMode="CanMinimize" Height="450" Width="600" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <Label Content="Path:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="10,17,0,0"/>
-        <Label Content="MountPoint:" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="Tag:" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="DebugLogFile:" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="DebugFlags:" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" Width="95"/>
-        <Label Content="CaseInsensitive:" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="95"/>
-        <TextBox Name="PathTB" HorizontalAlignment="Stretch" Height="23" Margin="110,21,90.286,0" TextWrapping="NoWrap" VerticalAlignment="Top" Loaded="PathTB_Loaded"/>
-        <TextBox Name="MountPointTB" HorizontalAlignment="Left" Height="23" Margin="110,52,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="DebugLogFileTB" HorizontalAlignment="Left" Height="23" Margin="110,83,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="DebugFlagsTB" HorizontalAlignment="Left" Height="23" Margin="110,114,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="TagTB" HorizontalAlignment="Left" Height="23" Margin="110,145,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <CheckBox Name="CaseInsensitiveCB" IsThreeState="False" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,178,0,0"/>
-        <Button Content="Start" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10.286,9.714" Click="Button_Click_Start" Height="23"/>
-        <Button Content="Select" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,21,10.286,0" Click="Button_Click_Select" Height="23"/>
+        <GroupBox Header="VirtIO-FS path" Margin="10,10,10.286,346.714">
+            <StackPanel Margin="3">
+            <DockPanel>
+                <Button Content="Browse" Margin="3" VerticalContentAlignment="Center" Width="75" Click="Button_Click_Select"/>
+                <TextBox Name="PathTB" Margin="3" VerticalContentAlignment="Center" />
+            </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Control" Margin="232,337,10.286,9.714">
+            <StackPanel Margin="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="StartBtn" Content="Start" Margin="3" VerticalContentAlignment="Center" Width="75" Click="Button_Click_Start" Height="23"/>
+                <Button Name="StopBtn" Content="Stop" Margin="3" VerticalContentAlignment="Center" Width="75" Click="Button_Click_Stop" Height="23"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="WinFsp" Margin="10,337,367.286,9.714">
+            <StackPanel Margin="3">
+            <DockPanel>
+                <Label Content="Version:" Margin="3" VerticalContentAlignment="Center"/>
+                <TextBox Name="WinFspVersionTB" IsReadOnly="True" Text="" TextWrapping="NoWrap" Margin="3" VerticalContentAlignment="Center"/>
+            </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Mode" Margin="10,80,303.286,283.714">
+            <DockPanel>
+                <RadioButton Margin="3" VerticalContentAlignment="Center" IsChecked="True">Standalone</RadioButton>
+                <RadioButton Margin="3" VerticalContentAlignment="Center">Service</RadioButton>
+                <RadioButton Margin="3" VerticalContentAlignment="Center">WinFsp.Launcher</RadioButton>
+            </DockPanel>
+        </GroupBox>
+
+        <GroupBox Header="Parameters" Margin="10,143,303.286,89.714">
+            <StackPanel Margin="3">
+                <DockPanel>
+                    <Label Content="MountPoint:" Margin="3" VerticalContentAlignment="Center" Width="100"/>
+                    <TextBox Name="MountPointTB" TextWrapping="NoWrap" Margin="3" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Tag:" Margin="3" VerticalContentAlignment="Center" Width="100"/>
+                    <TextBox Name="TagTB" TextWrapping="NoWrap" Margin="3" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="DebugLogFile:" Margin="3" VerticalContentAlignment="Center" Width="100"/>
+                    <TextBox Name="DebugLogFileTB" TextWrapping="NoWrap" Margin="3" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="DebugFlags:" Margin="3" VerticalContentAlignment="Center" Width="100"/>
+                    <TextBox Name="DebugFlagsTB" TextWrapping="NoWrap" Margin="3" VerticalContentAlignment="Center"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="CaseInsensitive:" Margin="3" VerticalContentAlignment="Center" Width="100"/>
+                    <CheckBox Name="CaseInsensitiveCB" IsThreeState="False" Margin="2" VerticalContentAlignment="Center"/>
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>
